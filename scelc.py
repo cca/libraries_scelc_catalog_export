@@ -43,9 +43,15 @@ valid_count = 0
 
 with open(args.file, 'rb') as fh:
     reader = MARCReader(fh)
+    writer = MARCWriter(open('out.mrc', 'wb'))
     for record in reader:
+        # whether we'll include the _bib_ record in export file
+        include_record = False
+        # Koha stores item data in 952 fields, one per item
         for item in record.get_fields('952'):
+            # "item status" is an agglomeration of several things
             status = []
+            # whether the _item_ we're looking at should be included
             valid = True
 
             # checked out, will be a date if item is checked out
@@ -72,6 +78,7 @@ with open(args.file, 'rb') as fh:
                 status.append('withdrawn')
                 valid = False
 
+            # filter items based on location & type
             if item['c'] not in valid_locations:
                 valid = False
 
@@ -84,5 +91,10 @@ with open(args.file, 'rb') as fh:
             total_count += 1
             if valid is True:
                 valid_count += 1
+                # if there's any valid item then the bib should be included
+                include_record = True
 
-print('Total Records: %i | Valid Records: %i' % (total_count, valid_count))
+        if include_record is True:
+            writer.write(record)
+
+print('Total items: %i | Items included: %i' % (total_count, valid_count))
