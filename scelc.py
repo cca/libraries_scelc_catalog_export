@@ -4,27 +4,31 @@ parser = argparse.ArgumentParser()
 parser.add_argument("file", help="the input MARC file")
 args = parser.parse_args()
 
+# https://library-staff.cca.edu/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST
 lost_codes = {
     "0": "",
-    "2": "Long Overdue (Lost)",
     "1": "Lost",
-    "5": "Lost (On Search)",
+    "2": "Long Overdue (Lost)",
     "3": "Lost and Paid For",
     "4": "Missing",
+    "5": "Lost (On Search)",
+    "6": "Claims Returned",
 }
 
+# https://library-staff.cca.edu/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN
 notforloan_codes = {
+    "-3":	"Repair",
+    "-2":	"In Processing",
+    "-1":	"Ordered",
     "0":	"",
+    "1":	"Library Use Only",
+    "2":	"Staff Collection",
     "3":	"Bindery",
     "4":	"By Appointment",
-    "-2":	"In Processing",
-    "1":	"Library Use Only",
     "5":	"On display",
-    "-1":	"Ordered",
-    "-3":	"Repair",
-    "2":	"Staff Collection",
 }
 
+# https://library-staff.cca.edu/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOC
 valid_locations = [
     "CART",
     "FACDEV",
@@ -33,6 +37,7 @@ valid_locations = [
     "DISPLAY",
 ]
 
+# https://library-staff.cca.edu/cgi-bin/koha/admin/itemtypes.pl
 valid_types = [
     "BOOK",
     "SUPPL",
