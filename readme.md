@@ -10,8 +10,10 @@ Use [pipenv](https://pipenv.pypa.io/en/latest/) to install a Python 3 virtual en
 > pipenv --three
 > pipenv install
 > pipenv shell
-> python scelc.py koha.mrc # running the script in the virtual env
+> python sharedprint.py koha.mrc # running the script in the virtual env
 ```
+
+See the script's usage `python sharedprint.py -h` for more details. You can also compare our current catalog holdings with what's in GreenGlass by passing a catalog MARC export and a CSV of the complete GreenGlass data. You can use Python csvkit's `in2csv` to convert the GreenGlass xslx export to CSV.
 
 ## License
 

@@ -9,7 +9,7 @@ circulating items only or 2) performs a comparison between what's in the catalog
 and what's in GreenGlass i.e. how many records were added and weeded.
 
 Arguments:
-    INPUT       MARC records (.mrc)
+    INPUT           MARC records (.mrc file)
 
 Options:
     -h --help       show this usage information
